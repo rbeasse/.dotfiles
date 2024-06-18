@@ -1,0 +1,11 @@
+#!/bin/bash
+
+if [ "$1" = "install" ]; then
+  for script in $HOME/.dotfiles/scripts/*.sh; do source $script; done
+elif [ "$1" = "config" ]; then
+  cd ~/.dotfiles/
+
+  stow --adopt home
+else
+  echo "Please provide an argument (install|config)"
+fi
