@@ -25,3 +25,5 @@ fi
 if [ -f /usr/local/bin/starship ]; then
   eval "$(starship init bash)"
 fi
+
+export PATH=$HOME/.dotfiles/bin:$PATH
