@@ -5,6 +5,11 @@
 #   dotfiles install terminal
 #   dotfiles install xyz
 
+if ! [ -d $HOME/.dotfiles/ ]; then
+  echo "[error] Please ensure you cloned .dotfiles to your home directory"
+  exit 1
+fi
+
 # Itterate through our config folder and create symlinks for each configuration file and folder found
 # at the top level of this directory. Going deeper is not needed as a symlinked folder will include all
 # children.
@@ -18,7 +23,7 @@ create_symlinks_for_config() {
     rm -rf $HOME/$filename
     ln -s $file $HOME/$filename
 
-    echo "Created symlink: $file -> $HOME/$filename"
+    echo "[info] Created symlink: $file -> $HOME/$filename"
   done
 }
 
@@ -27,7 +32,8 @@ run_install_script() {
   if [ -f $HOME/.dotfiles/install/$1.sh ]; then
     source $HOME/.dotfiles/install/$1.sh
   else
-    echo "Could not find install script to run: $1.sh"
+    echo "[error] Could not find install script to run: $1.sh"
+    exit 1
   fi
 }
 
@@ -37,7 +43,8 @@ if [ "$1" = "install" ]; then
 elif [ "$1" = "config" ]; then
   create_symlinks_for_config
 else
-  echo "Please provide an argument (install|config)"
+  echo "[error] Please provide an argument (install|config)"
+  exit 1
 fi
 
 

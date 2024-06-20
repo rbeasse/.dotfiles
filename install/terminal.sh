@@ -17,30 +17,11 @@ if [ -f /usr/local/bin/bat ]; then
   echo 'bat is already installed'
 else
   curl -sL https://github.com/sharkdp/bat/releases/download/v0.24.0/bat-v0.24.0-x86_64-unknown-linux-gnu.tar.gz | tar xz
-  cd bat-v0.24.0-x86_64-unknown-linux-gnu/
+  cd bat-*/
   sudo chmod +x bat
   sudo chown root:root bat
   sudo mv bat /usr/local/bin/bat
-  rm -rf ../bat-v0.24.0-x86_64-unknown-linux-gnu/
-fi
-
-# zoxide
-# https://github.com/ajeetdsouza/zoxide
-if [ -f ~/.local/bin/zoxide ]; then
-  echo 'zoxide is already installed'
-else
-  curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
-fi
-
-# starship
-# https://github.com/starship/starship
-if [ -f /usr/local/bin/starship ]; then
-  echo 'starship is already installed'
-else
-  curl -sL https://github.com/starship/starship/releases/latest/download/starship-x86_64-unknown-linux-gnu.tar.gz | tar xz
-  sudo chmod +x starship
-  sudo chown root:root starship
-  sudo mv starship /usr/local/bin/starship
+  rm -rf ../bat-*/
 fi
 
 # fzf
