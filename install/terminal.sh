@@ -37,7 +37,10 @@ fi
 if [ -f /usr/local/bin/starship ]; then
   echo 'starship is already installed'
 else
-  curl -sS https://starship.rs/install.sh | sh
+  curl -sL https://github.com/starship/starship/releases/latest/download/starship-x86_64-unknown-linux-gnu.tar.gz | tar xz
+  sudo chmod +x starship
+  sudo chown root:root starship
+  sudo mv starship /usr/local/bin/starship
 fi
 
 # fzf

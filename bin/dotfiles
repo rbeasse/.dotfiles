@@ -1,11 +1,43 @@
 #!/bin/bash
+#
+# Usage:
+#   dotfiles config
+#   dotfiles install terminal
+#   dotfiles install xyz
 
+# Itterate through our config folder and create symlinks for each configuration file and folder found
+# at the top level of this directory. Going deeper is not needed as a symlinked folder will include all
+# children.
+create_symlinks_for_config() {
+  files=$(find $HOME/.dotfiles/config -maxdepth 1 -name ".*")
+
+  for file in $files; do
+    filename=$(basename $file)
+
+    # Remove any existing files first, as they will be replaced with the new symlink.. then create the link.
+    rm -rf $HOME/$filename
+    ln -s $file $HOME/$filename
+
+    echo "Created symlink: $file -> $HOME/$filename"
+  done
+}
+
+# Given a script name, run the specific script with that name.
+run_install_script() {
+  if [ -f $HOME/.dotfiles/install/$1.sh ]; then
+    source $HOME/.dotfiles/install/$1.sh
+  else
+    echo "Could not find install script to run: $1.sh"
+  fi
+}
+
+# Handle both install and config arguments and ensure the correct actions are ran.
 if [ "$1" = "install" ]; then
-  for script in $HOME/.dotfiles/scripts/*.sh; do source $script; done
+  run_install_script $2
 elif [ "$1" = "config" ]; then
-  cd ~/.dotfiles/
-
-  stow --adopt home
+  create_symlinks_for_config
 else
   echo "Please provide an argument (install|config)"
 fi
+
+

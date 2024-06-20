@@ -2,6 +2,9 @@ alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 
+export PATH=$HOME/.dotfiles/bin:$PATH
+export PATH=$HOME/.local/bin:$PATH
+
 cd ~
 
 if [ -f /usr/local/bin/eza ]; then
@@ -25,5 +28,3 @@ fi
 if [ -f /usr/local/bin/starship ]; then
   eval "$(starship init bash)"
 fi
-
-export PATH=$HOME/.dotfiles/bin:$PATH
