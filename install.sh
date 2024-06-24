@@ -1,7 +1,7 @@
 #!/bin/bash
 
 cd $HOME
-git clone git@github.com:rbeasse/.dotfiles.git
+git clone https://github.com/rbeasse/.dotfiles.git
 cd $HOME/.dotfiles
 
 ./bin/dotfiles config

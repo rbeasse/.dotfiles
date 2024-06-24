@@ -18,6 +18,24 @@ if [ -f /usr/local/bin/fzf ]; then
   eval "$(fzf --bash)"
 fi
 
+# Helper function to execute a docker container, using fzf to find the container.
+function dex() {
+	CONTAINER=`docker ps | rg -v CONTAINER | awk '-F ' ' {print $NF}' | fzf`
+	if [ ! -z $CONTAINER ]
+	then
+		docker exec -it $CONTAINER bash
+	fi
+}
+
+# Helper function to log a docker container, using fzf to find the container.
+function dlog() {
+	CONTAINER=`docker ps | rg -v CONTAINER | awk '-F ' ' {print $NF}' | fzf`
+	if [ ! -z $CONTAINER ]
+	then
+		docker logs -f $CONTAINER
+	fi
+}
+
 source $HOME/.bashprompt
 
 cd ~
