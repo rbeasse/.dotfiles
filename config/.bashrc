@@ -19,7 +19,7 @@ if [ -f /usr/local/bin/fzf ]; then
 fi
 
 # Helper function to execute a docker container, using fzf to find the container.
-function dex() {
+function dexec() {
 	CONTAINER=`docker ps | rg -v CONTAINER | awk '-F ' ' {print $NF}' | fzf`
 	if [ ! -z $CONTAINER ]
 	then
