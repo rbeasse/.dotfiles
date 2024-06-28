@@ -9,6 +9,7 @@
     autocrlf = input
     editor = code -w
     filemode = false
+	excludesFile = ~/.gitignore
 
 [alias]
     branch-name = "!git rev-parse --abbrev-ref HEAD"

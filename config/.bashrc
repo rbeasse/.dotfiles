@@ -38,4 +38,6 @@ function dlog() {
 
 source $HOME/.bashprompt
 
+eval $(ssh-agent)
+
 cd ~
