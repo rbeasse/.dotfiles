@@ -20,7 +20,7 @@ fi
 
 # Helper function to execute a docker container, using fzf to find the container.
 function dexec() {
-	CONTAINER=`docker ps | rg -v CONTAINER | awk '-F ' ' {print $NF}' | fzf`
+	CONTAINER=`docker ps | grep -v CONTAINER | awk '-F ' ' {print $NF}' | fzf`
 	if [ ! -z $CONTAINER ]
 	then
 		docker exec -it $CONTAINER bash
@@ -29,7 +29,7 @@ function dexec() {
 
 # Helper function to log a docker container, using fzf to find the container.
 function dlog() {
-	CONTAINER=`docker ps | rg -v CONTAINER | awk '-F ' ' {print $NF}' | fzf`
+	CONTAINER=`docker ps | grep -v CONTAINER | awk '-F ' ' {print $NF}' | fzf`
 	if [ ! -z $CONTAINER ]
 	then
 		docker logs -f $CONTAINER
